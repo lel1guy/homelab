@@ -63,7 +63,7 @@ All containers run with custom Docker bridge networks, health checks, restart po
 | **Docker 29.5** | With Docker Compose plugin and containerd runtime |
 | **Tailscale** | Mesh VPN — encrypted peer-to-peer connections, ACL-based access control |
 | **firewalld** | Dynamic firewall — per-service port management, zone-based policies |
-| **Hermes Agent** | AI agent with 21 automated cron pipelines — see [lel1guy/hermes-homelab](https://github.com/lel1guy/hermes-homelab) |
+| **Hermes Agent** | AI agent with 17 automated cron pipelines — see [lel1guy/hermes-homelab](https://github.com/lel1guy/hermes-homelab) |
 
 ---
 
@@ -98,7 +98,7 @@ All containers run with custom Docker bridge networks, health checks, restart po
 
 ## Automation
 
-The Hermes Agent runs 21 scheduled cron jobs covering:
+The Hermes Agent runs 17 scheduled cron jobs covering:
 
 | Category | Jobs | Examples |
 |----------|------|---------|
