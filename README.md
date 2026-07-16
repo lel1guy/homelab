@@ -2,13 +2,13 @@
 
 > Self-hosted infrastructure running on KAIDO-01 — Fedora Linux server with Docker Compose stacks, PostgreSQL, Tailscale mesh VPN, and automated operations.
 
-Built and maintained by [@lel1guy](https://github.com/lel1guy) in Quarteira, Algarve, Portugal.
+Built and maintained by [@lel1guy](https://github.com/lel1guy) in Portugal.
 
 ---
 
 ## Overview
 
-A production-grade single-server homelab powering AI agent operations, workflow automation, and personal knowledge management. The server runs 24/7 with Docker Compose orchestration, native PostgreSQL, and a Tailscale mesh VPN connecting 3 devices across the local network.
+A production-grade single-server homelab powering AI agent operations, workflow automation, and personal knowledge management. The server runs 24/7 with Docker Compose orchestration, native PostgreSQL, and a Tailscale mesh VPN connecting devices across the local network.
 
 All services are documented with their purpose, ports, and dependencies. The entire stack is recoverable from Docker Compose files and git-tracked configuration.
 
@@ -21,9 +21,8 @@ All services are documented with their purpose, ports, and dependencies. The ent
 | **Machine** | Toshiba Tecra Z40-C |
 | **CPU** | Intel Core i5-6200U (2C/4T, 2.3 GHz) |
 | **RAM** | 8 GB DDR4 |
-| **Storage** | 256 GB SSD (151 GB root, 28% used) |
+| **Storage** | 256 GB SSD |
 | **OS** | Fedora 44 (kernel 6.19.10-300) |
-| **Uptime** | 6+ days (typical) |
 
 ---
 
@@ -31,15 +30,15 @@ All services are documented with their purpose, ports, and dependencies. The ent
 
 | Interface | Address | Purpose |
 |-----------|---------|---------|
-| LAN (enp0s31f6) | 192.168.1.77/24 | Local network access |
-| Tailscale | 100.75.179.121 | Mesh VPN — encrypted peer-to-peer |
+| LAN | 192.168.1.x/24 | Local network access |
+| Tailscale | 100.x.x.x | Mesh VPN — encrypted peer-to-peer |
 
-**Kodo Naming System:** The infrastructure follows a Japanese-themed naming convention (Kakurega Sector). Hostnames use the `int.torii.net` domain. `KAIDO` (街道, "main highway") is the compute category.
+**Kodo Naming System:** The infrastructure follows a Japanese-themed naming convention (Kakurega Sector). `KAIDO` (街道, "main highway") is the compute category.
 
 **Connected devices via Tailscale:**
 - KAIDO-01 — this server (Linux)
-- KAIDO-PH — mobile (Android)
-- VITOR-PC — workstation (Windows)
+- Mobile device (Android)
+- Workstation (Windows)
 
 ---
 
@@ -63,7 +62,7 @@ All containers run with custom Docker bridge networks, health checks, restart po
 | **Docker 29.5** | With Docker Compose plugin and containerd runtime |
 | **Tailscale** | Mesh VPN — encrypted peer-to-peer connections, ACL-based access control |
 | **firewalld** | Dynamic firewall — per-service port management, zone-based policies |
-| **Hermes Agent** | AI agent with 17 automated cron pipelines — see [lel1guy/hermes-homelab](https://github.com/lel1guy/hermes-homelab) |
+| **Hermes Agent** | AI agent with 21 automated cron pipelines — see [lel1guy/hermes-homelab](https://github.com/lel1guy/hermes-homelab) |
 
 ---
 
@@ -89,7 +88,7 @@ All containers run with custom Docker bridge networks, health checks, restart po
 |                                                       |
 |  +--------------------------------------------------+ |
 |  |           Tailscale Mesh VPN                      | |
-|  |  KAIDO-01 <----> KAIDO-PH <----> VITOR-PC       | |
+|  |  KAIDO-01 <----> Mobile <----> Workstation       | |
 |  +--------------------------------------------------+ |
 +-------------------------------------------------------+
 ```
@@ -98,16 +97,17 @@ All containers run with custom Docker bridge networks, health checks, restart po
 
 ## Automation
 
-The Hermes Agent runs 17 scheduled cron jobs covering:
+The Hermes Agent runs 21 scheduled cron jobs covering:
 
 | Category | Jobs | Examples |
 |----------|------|---------|
-| **Knowledge Management** | 4 | Session export, inbox processing, wiki ingest, task rebuilding |
-| **Notifications** | 3 | Morning briefing, stale item reminders, daily tech quiz |
-| **Content Generation** | 2 | Daily study podcast (edge-tts), RSS feed processing |
-| **System Health** | 2 | System status snapshots, uptime monitoring |
-| **Backup & Sync** | 3 | Vault backup, Syncthing event processing, logbook generation |
+| **Knowledge Management** | 5 | Session export, inbox processing, wiki ingest, task rebuilding, stale checks |
+| **Notifications** | 4 | Morning briefing, stale item reminders, daily tech quiz, RSS feeds |
+| **Content Generation** | 2 | Daily study podcast (edge-tts), weekly vault stats |
+| **System Health** | 3 | System status snapshots, Syncthing events, uptime monitoring |
+| **Backup & Sync** | 2 | Vault backup, logbook generation |
 | **Study Tracking** | 2 | Study plan reminders, weekly progress review |
+| **Session Processing** | 3 | Nightly note processing, daily knowledge extraction, daily note |
 
 All automation scripts are Python and Bash, version-tracked, and configurable via environment variables.
 
@@ -120,8 +120,6 @@ All automation scripts are Python and Bash, version-tracked, and configurable vi
 | `vault` | Obsidian knowledge vault — 350+ notes |
 | `honcho` | AI memory server with pgvector |
 | `hermes-webui` | Web interface for Hermes Agent |
-| `hermes-agent-self-evolution` | Agent self-improvement system |
-| `career-ops` | Job search tracking |
 
 ---
 
